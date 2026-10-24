@@ -1,0 +1,83 @@
+# SvelteKit static site — yarn 4 via corepack (not npm, not pnpm).
+# https://taskfile.dev
+version: '3'
+
+vars:
+  YARN_MSG: 'yarn not found — install Node.js and run: corepack enable'
+
+tasks:
+  default:
+    desc: List available tasks
+    cmds:
+      - task --list --sort=none
+    silent: true
+
+  install:
+    desc: Install dependencies
+    preconditions:
+      - sh: command -v yarn
+        msg: '{{.YARN_MSG}}'
+    sources: [package.json, yarn.lock, .yarnrc.yml]
+    generates: [node_modules/.yarn-state.yml]
+    cmds:
+      - yarn install
+
+  dev:
+    desc: Start the development server
+    deps: [install]
+    cmds:
+      - yarn dev {{.CLI_ARGS}}
+
+  build:
+    desc: Build the static site into build/
+    deps: [install]
+    cmds:
+      - yarn build
+
+  preview:
+    desc: Preview the production build locally
+    deps: [build]
+    cmds:
+      - yarn preview {{.CLI_ARGS}}
+
+  fmt:
+    desc: Format the code
+    aliases: [format]
+    deps: [install]
+    cmds:
+      - yarn format
+
+  fmt:check:
+    desc: Check formatting without modifying files
+    deps: [install]
+    cmds:
+      - yarn format:check
+
+  typecheck:
+    desc: Type-check Svelte and TypeScript sources
+    deps: [install]
+    cmds:
+      - yarn check
+
+  typecheck:watch:
+    desc: Type-check in watch mode
+    deps: [install]
+    cmds:
+      - yarn check:watch
+
+  check:
+    desc: Run all static checks (formatting + types)
+    cmds:
+      - task: fmt:check
+      - task: typecheck
+
+  ci:
+    desc: Full CI sequence (checks + build)
+    cmds:
+      - task: check
+      - task: build
+
+  clean:
+    desc: Remove build output and generated files
+    cmds:
+      - rm -rf build .svelte-kit
