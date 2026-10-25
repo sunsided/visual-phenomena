@@ -12,6 +12,7 @@
 	let palette = $state<SpherePalette>('original');
 	let sphere = $state(true);
 	let pillar = $state(true);
+	let ballCell = $state(38);
 </script>
 
 <PhenomenonLayout
@@ -19,12 +20,13 @@
 	lede="A honeycomb wall, a pillar, and a ball in front of it, drawn once and never touched again. The ball still drifts against everything behind it, and not a single pixel is animated."
 >
 	{#snippet stage()}
-		<FloatingSphere {stroke} {sphereDrift} {pillarDrift} {palette} {sphere} {pillar} />
+		<FloatingSphere {stroke} {sphereDrift} {pillarDrift} {palette} {sphere} {pillar} {ballCell} />
 	{/snippet}
 
 	{#snippet controls()}
 		<ControlGroup title="Pattern">
 			<Slider label="Stroke width" bind:value={stroke} min={0} max={0.2} step={0.01} />
+			<Slider label="Ball cell size" bind:value={ballCell} min={20} max={70} step={2} />
 			<Segmented
 				label="Ball drift"
 				bind:value={sphereDrift}
@@ -90,6 +92,10 @@
 				the pillar swims while the ball stays put.
 			</li>
 			<li><strong>Pillar</strong> off flattens the wall behind the ball.</li>
+			<li>
+				<strong>Ball cell size:</strong> large cells weaken the drift; the original's ball has roughly
+				seven cells across.
+			</li>
 			<li><strong>Stroke width</strong> at 0: a nice honeycomb, and nothing more.</li>
 			<li>
 				Look at the right-hand side of the picture and let the ball sit in the corner of your eye.

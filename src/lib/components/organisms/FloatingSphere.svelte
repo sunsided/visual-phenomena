@@ -53,6 +53,8 @@
 		palette?: SpherePalette;
 		sphere?: boolean;
 		pillar?: boolean;
+		/** Cell radius on the ball, in viewBox units (the wall uses 50). */
+		ballCell?: number;
 	}
 
 	let {
@@ -61,14 +63,14 @@
 		pillarDrift = 'with',
 		palette = 'original',
 		sphere = true,
-		pillar = true
+		pillar = true,
+		ballCell = 38
 	}: Props = $props();
 
 	const W = 1000;
 	const H = 560;
 	const HEX = 50; // centre-to-vertex radius of a wall cell
 	const PILLAR_HEX = 44;
-	const SPHERE_HEX = 58; // the ball's texture is a little coarser, as in the original
 	const BODY = 0.78; // hexagon inside the gold lattice, relative to the cell
 	const SPHERE = { cx: 290, cy: 285, r: 230 };
 	// The pillar stands behind the ball: its left rim only shows above and below it.
@@ -177,9 +179,9 @@
 	const sphereTiles = $derived.by(() => {
 		const reach = (SPHERE.r * Math.PI) / 2;
 		const dir: Point = sphereDrift === 'none' ? [0, 0] : sphereDrift === 'against' ? LEFT : RIGHT;
-		return lattice(reach, reach, SPHERE_HEX)
-			.filter(([x, y]) => Math.hypot(x, y) < reach + SPHERE_HEX)
-			.map((c) => tile(c, SPHERE_HEX, dir, onSphere));
+		return lattice(reach, reach, ballCell)
+			.filter(([x, y]) => Math.hypot(x, y) < reach + ballCell)
+			.map((c) => tile(c, ballCell, dir, onSphere));
 	});
 </script>
 
@@ -214,7 +216,7 @@
 		<radialGradient id="{uid}-shade" cx="0.38" cy="0.32" r="0.75">
 			<stop offset="0" stop-color="#fff" stop-opacity="0.1" />
 			<stop offset="0.55" stop-color="#fff" stop-opacity="0" />
-			<stop offset="1" stop-color="#000" stop-opacity="0.35" />
+			<stop offset="1" stop-color="#000" stop-opacity="0.15" />
 		</radialGradient>
 	</defs>
 
