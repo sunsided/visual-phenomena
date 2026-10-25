@@ -1,33 +1,45 @@
 <script lang="ts">
 	import { ControlGroup, FloatingSphere, PhenomenonLayout, Segmented, Slider, Toggle } from '#lib';
-	import type { SphereDrift, SpherePalette } from '#lib/components/organisms/FloatingSphere.svelte';
+	import type {
+		PillarDrift,
+		SphereDrift,
+		SpherePalette
+	} from '#lib/components/organisms/FloatingSphere.svelte';
 
-	let stroke = $state(0.09);
-	let sphereDrift = $state<SphereDrift>('original');
+	let stroke = $state(0.1);
+	let sphereDrift = $state<SphereDrift>('against');
+	let pillarDrift = $state<PillarDrift>('with');
 	let palette = $state<SpherePalette>('original');
 	let sphere = $state(true);
-	let tube = $state(true);
+	let pillar = $state(true);
 </script>
 
 <PhenomenonLayout
 	title="Floating sphere"
-	lede="A honeycomb and a ball in front of it, drawn once and never touched again. The ball still drifts, the wall behind it drifts the other way, and neither of them has a single animated pixel."
+	lede="A honeycomb wall, a pillar, and a ball in front of it, drawn once and never touched again. The ball still drifts against everything behind it, and not a single pixel is animated."
 >
 	{#snippet stage()}
-		<FloatingSphere {stroke} {sphereDrift} {palette} {sphere} {tube} />
+		<FloatingSphere {stroke} {sphereDrift} {pillarDrift} {palette} {sphere} {pillar} />
 	{/snippet}
 
 	{#snippet controls()}
 		<ControlGroup title="Pattern">
 			<Slider label="Stroke width" bind:value={stroke} min={0} max={0.2} step={0.01} />
 			<Segmented
-				label="Sphere drift"
+				label="Ball drift"
 				bind:value={sphereDrift}
 				options={[
-					{ value: 'original', label: 'Original' },
-					{ value: 'opposite', label: 'Opposite' },
-					{ value: 'same', label: 'Same' },
+					{ value: 'against', label: 'Against wall' },
+					{ value: 'with', label: 'With wall' },
 					{ value: 'none', label: 'None' }
+				]}
+			/>
+			<Segmented
+				label="Pillar drift"
+				bind:value={pillarDrift}
+				options={[
+					{ value: 'with', label: 'With wall' },
+					{ value: 'against', label: 'Against wall' }
 				]}
 			/>
 			<Segmented
@@ -38,8 +50,8 @@
 					{ value: 'grey', label: 'Grey' }
 				]}
 			/>
-			<Toggle label="Sphere" bind:checked={sphere} />
-			<Toggle label="Tube" bind:checked={tube} />
+			<Toggle label="Ball" bind:checked={sphere} />
+			<Toggle label="Pillar" bind:checked={pillar} />
 		</ControlGroup>
 	{/snippet}
 
@@ -53,29 +65,31 @@
 			Kitaoka's effect: "a white and black stroke on a coloured background".
 		</p>
 		<p>
-			Each hexagon has a black stroke on one side and a white stroke on the other, so reading across
-			a tile you get gold, black, purple, white, gold again: light, black, dark, white, light.
-			That's the same asymmetric luminance sequence as in the
-			<a href="/phenomena/rotating-snakes">rotating snakes</a>, and the drift runs the same way,
-			from black to dark and from white to light. The wall drifts to the right, the strokes on the
-			ball point up and to the right, and the two slide against each other. Behind the ball the wall
-			bends back into a tube whose cells squash into slivers towards its rims; that gives the
-			picture its depth, and the ball reads as an object hanging in front of it.
+			Each hexagon has a white stroke along the three edges on one side and a black stroke along the
+			three on the other, so reading across a cell you get gold, black, purple, white, gold again:
+			light, black, dark, white, light. That's the asymmetric luminance sequence from the
+			<a href="/phenomena/rotating-snakes">rotating snakes</a>, and the drift runs from black to
+			dark and from white to light, i.e. towards the white side.
 		</p>
 		<p>
-			My version is a rebuild rather than a copy: the tube is a plain hourglass with a vertical
-			axis, and the ball is wrapped honeycomb with a bit of shading.
+			What floats is whatever drifts against everything around it. Here the wall and the pillar both
+			drift to the right and the ball's strokes point to the left, so the ball is the odd one out
+			and slides against its whole surround. Measuring the strokes on the BBC's (heavily compressed)
+			copy of the original suggested a different layout, with the pillar drifting against wall and
+			ball; on screen that makes the pillar swim and leaves the ball sitting still, which you can
+			check with the controls.
 		</p>
 		<p>Things to try:</p>
 		<ul>
+			<li><strong>Ball drift: None</strong> drops the strokes on the ball; it settles down.</li>
 			<li>
-				<strong>Sphere drift: None</strong> drops the strokes on the ball; the ball sits still.
+				<strong>With wall</strong> lets the ball drift along with everything else; no floating.
 			</li>
 			<li>
-				<strong>Opposite</strong> and <strong>Same</strong> point the ball's strokes straight against
-				or along the wall's; compare how much floating is left in each.
+				<strong>Pillar drift: Against wall</strong> makes the pillar the odd one out instead, and now
+				the pillar swims while the ball stays put.
 			</li>
-			<li><strong>Tube</strong> off flattens the wall behind the ball.</li>
+			<li><strong>Pillar</strong> off flattens the wall behind the ball.</li>
 			<li><strong>Stroke width</strong> at 0: a nice honeycomb, and nothing more.</li>
 			<li>
 				Look at the right-hand side of the picture and let the ball sit in the corner of your eye.

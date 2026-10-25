@@ -59,7 +59,7 @@ export const phenomena: Phenomenon[] = [
 		path: '/phenomena/floating-sphere',
 		title: 'Floating sphere',
 		summary:
-			'A ball in front of a honeycomb wall, both perfectly still, drifting in different directions anyway. Also, no, it is not a stress test.',
+			'A ball in front of a honeycomb wall, all of it perfectly still, and the ball drifts anyway. Also, no, it is not a stress test.',
 		preview: { component: FloatingSphere }
 	},
 	{
