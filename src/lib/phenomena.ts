@@ -2,6 +2,7 @@ import type { Component } from 'svelte';
 import type { RouteId } from '$app/types';
 import ArrowField from './components/organisms/ArrowField.svelte';
 import CafeWall from './components/organisms/CafeWall.svelte';
+import FloatingSphere from './components/organisms/FloatingSphere.svelte';
 import FourStrokeField from './components/organisms/FourStrokeField.svelte';
 import HueField from './components/organisms/HueField.svelte';
 import LilacChaser from './components/organisms/LilacChaser.svelte';
@@ -52,6 +53,14 @@ export const phenomena: Phenomenon[] = [
 		summary:
 			'A completely static image (not a single animated pixel) that keeps turning anyway, at least wherever you are not looking.',
 		preview: { component: RotatingSnakes, props: { rows: 1, cols: 2 } }
+	},
+	{
+		slug: 'floating-sphere',
+		path: '/phenomena/floating-sphere',
+		title: 'Floating sphere',
+		summary:
+			'A ball in front of a honeycomb wall, both perfectly still, drifting in different directions anyway. Also, no, it is not a stress test.',
+		preview: { component: FloatingSphere }
 	},
 	{
 		slug: 'cafe-wall',

@@ -12,6 +12,7 @@ export { default as PhenomenonCard } from './components/molecules/PhenomenonCard
 // Organisms
 export { default as ArrowField } from './components/organisms/ArrowField.svelte';
 export { default as CafeWall } from './components/organisms/CafeWall.svelte';
+export { default as FloatingSphere } from './components/organisms/FloatingSphere.svelte';
 export { default as FourStrokeField } from './components/organisms/FourStrokeField.svelte';
 export { default as HueField } from './components/organisms/HueField.svelte';
 export { default as LilacChaser } from './components/organisms/LilacChaser.svelte';
