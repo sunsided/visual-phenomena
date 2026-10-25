@@ -3,6 +3,7 @@ import type { RouteId } from '$app/types';
 import ArrowField from './components/organisms/ArrowField.svelte';
 import CafeWall from './components/organisms/CafeWall.svelte';
 import FourStrokeField from './components/organisms/FourStrokeField.svelte';
+import HueField from './components/organisms/HueField.svelte';
 import LilacChaser from './components/organisms/LilacChaser.svelte';
 import MotionInducedBlindness from './components/organisms/MotionInducedBlindness.svelte';
 import RotatingSnakes from './components/organisms/RotatingSnakes.svelte';
@@ -35,6 +36,14 @@ export const phenomena: Phenomenon[] = [
 		summary:
 			'Arrows that hop forward and straight back again, forever, and still appear to travel: every return hop swaps light and dark.',
 		preview: { component: FourStrokeField, props: { rows: 2, cols: 6 } }
+	},
+	{
+		slug: 'hue-rings',
+		path: '/phenomena/hue-rings',
+		title: 'Hue rings',
+		summary:
+			'Two rings spinning through the colour wheel, nailed to the spot, drifting towards their arrows anyway: two-pixel edges running a little ahead of the colour, or a little behind.',
+		preview: { component: HueField }
 	},
 	{
 		slug: 'rotating-snakes',

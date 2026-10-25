@@ -13,6 +13,7 @@ export { default as PhenomenonCard } from './components/molecules/PhenomenonCard
 export { default as ArrowField } from './components/organisms/ArrowField.svelte';
 export { default as CafeWall } from './components/organisms/CafeWall.svelte';
 export { default as FourStrokeField } from './components/organisms/FourStrokeField.svelte';
+export { default as HueField } from './components/organisms/HueField.svelte';
 export { default as LilacChaser } from './components/organisms/LilacChaser.svelte';
 export { default as MotionInducedBlindness } from './components/organisms/MotionInducedBlindness.svelte';
 export { default as RotatingSnakes } from './components/organisms/RotatingSnakes.svelte';
@@ -26,3 +27,4 @@ export * from './clock.svelte';
 export * from './luminance';
 export * from './phenomena';
 export * from './playback.svelte';
+export * from './shapes';
