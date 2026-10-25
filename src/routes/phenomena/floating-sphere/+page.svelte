@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import { ControlGroup, FloatingSphere, PhenomenonLayout, Segmented, Slider, Toggle } from '#lib';
 	import type {
 		PillarDrift,
@@ -70,8 +71,8 @@
 			Each hexagon has a white stroke along the three edges on one side and a black stroke along the
 			three on the other, so reading across a cell you get gold, black, purple, white, gold again:
 			light, black, dark, white, light. That's the asymmetric luminance sequence from the
-			<a href="/phenomena/rotating-snakes">rotating snakes</a>, and the drift runs from black to
-			dark and from white to light, i.e. towards the white side.
+			<a href={resolve('/phenomena/rotating-snakes')}>rotating snakes</a>, and the drift runs from
+			black to dark and from white to light, i.e. towards the white side.
 		</p>
 		<p>
 			What floats is whatever drifts against everything around it. Here the wall and the pillar both

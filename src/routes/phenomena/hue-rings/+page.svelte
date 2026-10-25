@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import {
 		ControlGroup,
 		HueField,
@@ -104,12 +105,12 @@
 			the ring on edges facing away from the arrow, and about 60° behind on edges facing towards it.
 		</p>
 		<p>
-			That is the same rule as in the <a href="/phenomena/moving-arrows">moving arrows</a>, only in
-			colour: two neighbouring regions running through the same cycle with a phase offset look, to
-			an early motion detector, like something travelling from the leading region to the lagging
-			one. On the back edge the strip leads and the ring lags, so motion points into the ring; on
-			the front edge the ring leads and the strip lags, so motion points out of it. Both say
-			"forward", and the ring goes nowhere.
+			That is the same rule as in the <a href={resolve('/phenomena/moving-arrows')}>moving arrows</a
+			>, only in colour: two neighbouring regions running through the same cycle with a phase offset
+			look, to an early motion detector, like something travelling from the leading region to the
+			lagging one. On the back edge the strip leads and the ring lags, so motion points into the
+			ring; on the front edge the ring leads and the strip lags, so motion points out of it. Both
+			say "forward", and the ring goes nowhere.
 		</p>
 		<p>Things to try:</p>
 		<ul>

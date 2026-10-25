@@ -3,6 +3,7 @@
 	Page frame for a single phenomenon: heading, stage, controls, explanation.
 -->
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import type { Snippet } from 'svelte';
 
 	interface Props {
@@ -23,7 +24,7 @@
 
 <article class="phenomenon">
 	<header>
-		<a class="back" href="/">← All phenomena</a>
+		<a class="back" href={resolve('/')}>← All phenomena</a>
 		<h1>{title}</h1>
 		<p class="lede">{lede}</p>
 	</header>

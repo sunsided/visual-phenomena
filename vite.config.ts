@@ -12,7 +12,12 @@ export default defineConfig({
 			},
 
 			// Fully static output: every route is prerendered into build/.
-			adapter: adapter()
+			adapter: adapter(),
+
+			// GitHub Pages serves the site from /<repo>/; the deploy workflow sets BASE_PATH.
+			paths: {
+				base: (process.env.BASE_PATH ?? '') as '' | `/${string}`
+			}
 		})
 	]
 });
